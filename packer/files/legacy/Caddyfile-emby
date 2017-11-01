@@ -1,0 +1,4 @@
+https://change-me-emby-url {
+  tls change-me-mail-tls
+  proxy / localhost:8096
+}

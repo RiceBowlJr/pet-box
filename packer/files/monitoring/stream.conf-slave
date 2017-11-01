@@ -1,0 +1,10 @@
+[stream]
+    enabled = yes
+    destination = change-me-master-ip
+    api key = change-me-api-key
+    timeout seconds = 60
+    default port = 19999
+    buffer size bytes = 1048576
+    reconnect delay seconds = 5
+    initial clock resync iterations = 60
+

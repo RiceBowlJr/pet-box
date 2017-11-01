@@ -22,8 +22,7 @@ mkdir -p /etc/caddy /etc/ssl/caddy
 chown www-data /etc/caddy /etc/ssl/caddy
 curl -Ss https://getcaddy.com > /tmp/caddy.sh
 bash /tmp/caddy.sh personal
-cp /tmp/Caddyfile /etc/caddy/
+cp /tmp/Caddyfile-emby /etc/caddy/
 cp /tmp/monitoring-files/caddy.service /etc/systemd/system/
-cp /tmp/monitoring-files/caddy-sysvinit /etc/init.d/caddy && chmod u+x /etc/init.d/caddy
 printf "\n\nInstalling Caddy Reverse Proxy -------------------------------------------[ OK ]\n"
 
