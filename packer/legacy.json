@@ -14,7 +14,7 @@
       "source_ami": "{{user `source_ami`}}",
       "instance_type": "t2.medium",
       "ssh_username": "ubuntu",
-      "ami_name": "cap-prd-www-{{timestamp}}",
+      "ami_name": "pet-box-{{timestamp}}",
       "associate_public_ip_address": "true",
       "tags": {
         "Name": "pet-box-{{timestamp}}"
@@ -22,7 +22,7 @@
       "launch_block_device_mappings": [
         {
           "device_name": "/dev/sda1",
-          "volume_size": 500, 
+          "volume_size": 8, 
           "volume_type": "gp2",
           "delete_on_termination": true
         }
