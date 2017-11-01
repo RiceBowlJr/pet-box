@@ -1,0 +1,66 @@
+{                                                                                               
+ 
+ 
+  "variables":
+   {
+      "aws_profile": "{{env `AWS_PROFILE`}}",
+      "source_ami": "ami-1e749f67"
+   },  
+ 
+  "builders": [
+    {   
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.medium",
+      "ssh_username": "ubuntu",
+      "ami_name": "cap-prd-www-{{timestamp}}",
+      "associate_public_ip_address": "true",
+      "tags": {
+        "Name": "pet-box-{{timestamp}}"
+      },  
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 500, 
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        }
+      ]   
+    }   
+  ],
+  "provisioners": [
+    {   
+      "type": "file",
+      "source": "files/legacy/",
+      "destination": "/tmp/"
+    },  
+    {   
+      "type": "file",
+      "source": "files/common/",
+      "destination": "/tmp/"
+    },  
+    {   
+      "type": "file",    
+      "source": "files/monitoring-files",
+      "destination": "/tmp/"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'ubuntu' | {{ .Vars }}  sudo -E -S sh '{{ .Path }}'",
+      "script": "scripts/monitoring-slave.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'ubuntu' | {{ .Vars }}  sudo -E -S sh '{{ .Path }}'",
+      "script": "scripts/common.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'ubuntu' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+      "script": "scripts/legacy.sh"         
+    }
+ 
+  ]
+}
+            
